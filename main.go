@@ -15,9 +15,8 @@ var rdb *redis.Client
 func init() {
 	// Initialize Redis client
 	rdb = redis.NewClient(&redis.Options{
-		Addr:     "redis-18695.c1.asia-northeast1-1.gce.cloud.redislabs.com:18695",
-		Username: "default",
-		Password: "XhousSZSQ5Il5FCuirpNsqC5cyHhJdK4",
+		Addr:     "roundhouse.proxy.rlwy.net:40277",
+		Password: "",
 		DB:       0,
 	})
 }
