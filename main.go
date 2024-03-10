@@ -1,9 +1,6 @@
 package main
 
 import (
-	"crypto/tls"
-	"crypto/x509"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -16,29 +13,12 @@ import (
 var rdb *redis.Client
 
 func init() {
-	// Load TLS certificate and CA certificate
-	cert, err := tls.LoadX509KeyPair("cert.pem", "key.pem")
-	if err != nil {
-		log.Fatal("Error loading TLS certificate:", err)
-	}
-	caCert, err := ioutil.ReadFile("ca.crt")
-	if err != nil {
-		log.Fatal("Error reading CA certificate:", err)
-	}
-	caCertPool := x509.NewCertPool()
-	caCertPool.AppendCertsFromPEM(caCert)
-
-	// Initialize Redis client with TLS configuration
+	// Initialize Redis client
 	rdb = redis.NewClient(&redis.Options{
 		Addr:     "redis-18695.c1.asia-northeast1-1.gce.cloud.redislabs.com:18695",
-		Username: "default", // Corrected field name
+		Username: "default",
 		Password: "XhousSZSQ5Il5FCuirpNsqC5cyHhJdK4",
 		DB:       0,
-		TLSConfig: &tls.Config{
-			MinVersion:   tls.VersionTLS12,
-			Certificates: []tls.Certificate{cert},
-			RootCAs:      caCertPool,
-		},
 	})
 }
 
